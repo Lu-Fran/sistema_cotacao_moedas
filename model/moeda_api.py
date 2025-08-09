@@ -1,18 +1,16 @@
 import requests
-from datetime import datetime, date
+from  datetime import datetime
 
 class MoedaAPI:
 
-    def __init__(self):
-        self.url_base = "https://economia.awesomeapi.com.br/json"
-        self.moedas = self.get_lista_moedas()
+    def __init__(self, url_base="https://economia.awesomeapi.com.br/json"):
+        self.url_base = url_base
 
     def get_lista_moedas(self):
         try:
             response = requests.get(f'{self.url_base}/all')
             response.raise_for_status()
-            data = response.json()
-            return list(data.keys())
+            return  list(response.json().keys())
         except requests.RequestException:
             return []
 
@@ -23,21 +21,21 @@ class MoedaAPI:
             response = requests.get(url)
             response.raise_for_status()
             dados = response.json()
-            if dados:
-                return float(dados[0]['bid'])
+            return float(dados[0]['bid']) if dados else None
         except requests.RequestException:
-            pass
-        return None
+            return None
 
     def get_cotacoes_intervalo(self, moeda: str, data_inicio: str, data_fim: str):
-        di = datetime.strptime(data_inicio, "%d/%m/%Y").date()
-        df = datetime.strptime(data_fim, "%d/%m/%Y").date()
-        dias = abs((df - di).days)
-
-        url = f"{self.url_base}/daily/{moeda}-BRL/{dias}?start_date={di.strftime('%Y%m%d')}&end_date={df.strftime('%Y%m%d')}"
         try:
+            di = datetime.strptime(data_inicio, "%d/%m/%Y").date()
+            df = datetime.strptime(data_fim, "%d/%m/%Y").date()
+            dias = (df - di).days + 1
+            if dias <= 0:
+                return []
+            url = f"{self.url_base}/daily/{moeda}-BRL/{dias}?start_date={di.strftime('%Y%m%d')}&end_date={df.strftime('%Y%m%d')}"
             response = requests.get(url)
             response.raise_for_status()
             return response.json()
-        except requests.RequestException:
+        except (requests.RequestException, ValueError):
             return []
+

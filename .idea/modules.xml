@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/sistema_cotacao_moedas.iml" filepath="$PROJECT_DIR$/.idea/sistema_cotacao_moedas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/sistema_cotacao_moedas_MVC.iml" filepath="$PROJECT_DIR$/.idea/sistema_cotacao_moedas_MVC.iml" />
     </modules>
   </component>
 </project>
