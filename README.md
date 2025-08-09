@@ -69,3 +69,10 @@ python main.py
 ✅ Testes Automatizados
 pytest -v
 
+📄 Licença
+Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+
+✨ Autor
+Luís Eduardo
+💼 LinkedIn: www.linkedin.com/in/luis-eduardo-7481381a2
+📧 Contato: lecfranca.ti@gmail.com
